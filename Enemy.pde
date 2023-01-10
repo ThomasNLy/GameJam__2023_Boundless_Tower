@@ -23,10 +23,9 @@ class Enemy extends GameObject {
   
   void move()
   {
+    aiBrain();
     this.xspeed = this.xdir;
     this.yspeed += GRAVITY;
-    
-    aiBrain();
     
     this.x += this.xspeed;
     this.y += this.yspeed;
