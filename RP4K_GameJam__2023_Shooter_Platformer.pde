@@ -1,24 +1,24 @@
 // Testing Git Push/Pull
 // test 2
 
-<<<<<<< HEAD
+
 Level l;
-=======
+
 ArrayList<Bullet> bullets;
->>>>>>> bullet-shooting
+
 Player p;
 
 void setup()
 {
   size(1280, 720);
-<<<<<<< HEAD
+
   
   l = new Level();
   p = new Player(1 ,2);
-=======
+
   bullets = new ArrayList<Bullet>();
   p = new Player(1, 2);
->>>>>>> bullet-shooting
+
 }
 
 void draw()
