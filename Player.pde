@@ -12,7 +12,9 @@ class Player extends GameObject{
   
   void display()
   {
+    fill(255);
     circle(this.x, this.y, 10);
+    noFill();
   }
 
 

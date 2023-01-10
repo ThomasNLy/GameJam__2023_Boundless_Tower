@@ -10,7 +10,9 @@ class Bullet extends GameObject
   
   void display()
   {
+    fill(255, 0, 0);
     circle(this.x, this.y, 10);
+    noFill();
   }
   
   
