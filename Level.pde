@@ -17,9 +17,7 @@ class Level {
   
   void display()
   {
-    fill(100, 100, 100);
-    // base floor (y value could be written as this.h - 20)
-    rect(this.x, 700, this.w, 20);
+    background(200, 200, 200);
     
     // level generated floors
     for(int i = 0; i < floors.size(); i++)
@@ -35,6 +33,11 @@ class Level {
     randNumFloors = int(random(10, 15));
     
     // ------------- Floors
+    // Base floor
+    floors.add(new Floor(0, 700));
+    floors.get(0).w = 1280;
+    
+    // Additional floors
     for(int i = 0; i < randNumFloors; i++)
     {
       int randX, randY;
