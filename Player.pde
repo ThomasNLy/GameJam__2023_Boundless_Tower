@@ -23,6 +23,13 @@ class Player extends GameObject{
     fill(255);
     rect(this.x, this.y, this.w, this.h);
     noFill();
+    
+  }
+  
+  
+  void move()
+  {
+    super.move();
     this.yspeed += GRAVITY;
   }
 
