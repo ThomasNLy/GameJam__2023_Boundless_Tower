@@ -110,5 +110,19 @@ void playerFloorCollision()
         p.jumps = p.maxJumps;
       }
     }
+    
+    // enemy floor check
+    for(int i = 0; i < l.enemies.size(); i++)
+    {
+      Enemy e = l.enemies.get(i);
+      if (e.checkFloors(f))
+      {
+        if (e.y <= f.y)
+        { 
+          e.yspeed = 0;
+          e.y = f.y - e.h;
+        }
+      }
+    }
   }
 }
