@@ -6,7 +6,8 @@ class Player extends GameObject{
 
   boolean facingRight;
   float GRAVITY = 0.1;
-
+  int maxJumps = 2;
+  int jumps;
   Player(float x, float y)
   {
     super();
@@ -14,7 +15,7 @@ class Player extends GameObject{
     this.y = y;
     this.w = 10;
     this.h = 10;
-
+    jumps = maxJumps;
     facingRight = true;
   }
 
@@ -29,8 +30,11 @@ class Player extends GameObject{
   
   void move()
   {
-    super.move();
+    //super.move();
     this.yspeed += GRAVITY;
+    this.x += xspeed;
+    this.y += yspeed;
+    
   }
 
   //box collision 

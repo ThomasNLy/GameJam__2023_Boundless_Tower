@@ -23,14 +23,16 @@ void setup()
 void draw()
 {
   l.display();
+
   p.move();
+  
   p.display();
   for (Bullet b : bullets)
   {
     b.move();
     b.display();
   }
-
+  
   playerFloorCollision();
 }
 
@@ -49,10 +51,10 @@ void keyPressed()
       bullets.add(b);
     }
   }
-  if (key == 'w')
+  if (key == 'w'  && p.jumps > 0)
   {
-    
-    p.yspeed = -10;
+    p.jumps -= 1;
+    p.yspeed = -5;
   }
   if (key == 's')
   {
@@ -73,10 +75,10 @@ void keyPressed()
 void keyReleased()
 {
 
-  if (key == 'w')
-  {
-    p.yspeed = 0;
-  }
+  //if (key == 'w' || keyCode == UP)
+  //{
+  //  p.yspeed = 0;
+  //}
   if (key == 's')
   {
     p.yspeed = 0;
@@ -97,7 +99,7 @@ void playerFloorCollision()
 {
   for (Floor f : l.floors)
   {
-    
+
     if (p.collision(f))
     {
       if (p.y <= f.y) //check if the player lands on top of a floor 
@@ -105,8 +107,8 @@ void playerFloorCollision()
         //setting the player's yspeed to 0 and have them appear at the top of the floor 
         p.yspeed = 0;
         p.y = f.y - p.h;
+        p.jumps = p.maxJumps;
       }
-     
     }
   }
 }
