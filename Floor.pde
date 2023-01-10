@@ -1,7 +1,7 @@
 class Floor extends GameObject{
   
-  float w;
-  float h;
+  //float w;
+  //float h;
   
   Floor(int x, int y)
   {
