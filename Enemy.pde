@@ -1,6 +1,7 @@
 class Enemy extends GameObject {
   
   float GRAVITY = 0.1;
+  int dir;
   
   Enemy(SpawnPoint spawn)
   {
@@ -9,6 +10,8 @@ class Enemy extends GameObject {
     this.y = spawn.y;
     this.w = 20;
     this.h = 20;
+    this.dir = int(random(-2, 2));
+    this.xspeed = this.dir;
   }
   
   void display()
