@@ -27,10 +27,22 @@ void draw()
   p.move();
   
   p.display();
+  p.limitFireRate();
   for (Bullet b : bullets)
   {
     b.move();
     b.display();
+    
+  }
+  // a separate for loop needed to remove bullets as it can cause an index error to due index shifting when removing items
+  // and calling upon them
+  for(int i = 0; i < bullets.size(); i++)
+  {
+    Bullet b = bullets.get(i);
+    if(b.x < 0 || b.x > width)
+    {
+      bullets.remove(b);
+    }
   }
   
   playerFloorCollision();
@@ -38,14 +50,16 @@ void draw()
 
 void keyPressed()
 {
-  if (keyCode == 32)
+  if (keyCode == 32 && p.canShoot)
   {
-
+    p.canShoot = false;
+    
     if (p.facingRight)
     {
       Bullet b = new Bullet(p.x, p.y, 1);
       bullets.add(b);
-    } else
+    } 
+    else
     {
       Bullet b = new Bullet(p.x, p.y, -1);
       bullets.add(b);

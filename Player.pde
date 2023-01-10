@@ -1,9 +1,15 @@
 
-class Player extends GameObject{
+class Player extends GameObject {
+
+
+
+  int fireRate;
+  int shootCoolDown;
+  boolean canShoot;
   
-
-
-
+  
+  
+  
   boolean facingRight;
   float GRAVITY = 0.1;
   int maxJumps = 2;
@@ -15,8 +21,11 @@ class Player extends GameObject{
     this.y = y;
     this.w = 10;
     this.h = 10;
-    jumps = maxJumps;
-    facingRight = true;
+    this.jumps = maxJumps;
+    this.facingRight = true;
+    this.fireRate = 30;
+    this.canShoot = true;
+    this.shootCoolDown = 0;
   }
 
   void display()
@@ -24,17 +33,33 @@ class Player extends GameObject{
     fill(255);
     rect(this.x, this.y, this.w, this.h);
     noFill();
-    
   }
-  
-  
+
+
   void move()
   {
     //super.move();
     this.yspeed += GRAVITY;
     this.x += xspeed;
     this.y += yspeed;
-    
+  }
+
+  
+  void limitFireRate()
+  {
+    if (canShoot == false)
+    {
+      if (this.shootCoolDown < this.fireRate) // check if still on cool down
+      {
+        this.shootCoolDown++; //increase the cool down timer 
+        if(this.shootCoolDown == this.fireRate) // can shoot again once cool down is over
+        {
+          canShoot = true;
+          shootCoolDown = 0; // reset the timer for next time 
+        }
+      }
+      
+    } 
   }
 
   //box collision 
@@ -52,10 +77,10 @@ class Player extends GameObject{
 
     if (left < oRight && right > oLeft && top < oBottom && bottom > oTop)
     {
-     
+
       return true;
     }
-    
+
     return false;
   }
 }
