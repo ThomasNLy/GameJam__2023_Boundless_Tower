@@ -38,9 +38,18 @@ class Enemy extends GameObject {
     if(this.aiTimer > 180)
     {
       this.aiTimer = 0;
+      // X direction
       this.xdir = int(random(-2, 2));
+      // Y direction ( jumps randomly )
+      int shouldJump = int(random(2));
+      
+      if(shouldJump == 1)
+      {
+        this.yspeed = -5;
+      }
     }
     
+    // prevent going offscreen
     if(this.x + this.w > 1275 || this.x - 5 < 0)
     {
       this.xdir = -this.xdir;
