@@ -1,7 +1,8 @@
 class Enemy extends GameObject {
   
   float GRAVITY = 0.1;
-  int dir;
+  int xdir;
+  int aiTimer;
   
   Enemy(SpawnPoint spawn)
   {
@@ -10,8 +11,7 @@ class Enemy extends GameObject {
     this.y = spawn.y;
     this.w = 20;
     this.h = 20;
-    this.dir = int(random(-2, 2));
-    this.xspeed = this.dir;
+    this.aiTimer = 0;
   }
   
   void display()
@@ -23,9 +23,28 @@ class Enemy extends GameObject {
   
   void move()
   {
+    this.xspeed = this.xdir;
     this.yspeed += GRAVITY;
+    
+    aiBrain();
+    
     this.x += this.xspeed;
     this.y += this.yspeed;
+  }
+  
+  void aiBrain()
+  {
+    this.aiTimer++;
+    if(this.aiTimer > 180)
+    {
+      this.aiTimer = 0;
+      this.xdir = int(random(-2, 2));
+    }
+    
+    if(this.x + this.w > 1275 || this.x - 5 < 0)
+    {
+      this.xdir = -this.xdir;
+    }
   }
   
   // floor collision
