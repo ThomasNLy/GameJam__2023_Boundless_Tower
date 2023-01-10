@@ -1,11 +1,9 @@
-<<<<<<< HEAD
+
 class Player extends GameObject{
   
-=======
-class Player extends GameObject {
 
 
->>>>>>> a31ecd5 (added gravity to the player and have them collide with the floor)
+
   boolean facingRight;
   float GRAVITY = 0.1;
 
