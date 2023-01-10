@@ -1,6 +1,7 @@
 class GameObject{
 
-  float x, y, xspeed, yspeed;
+  float x, y, xspeed, yspeed, w, h;
+  
   
   GameObject()
   {
