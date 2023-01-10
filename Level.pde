@@ -4,6 +4,7 @@ class Level {
   int w;
   int h;
   ArrayList<Floor> floors;
+  ArrayList<Enemy> enemies;
  
   Level()
   {
@@ -12,7 +13,9 @@ class Level {
     this.w = 1280;
     this.h = 720;
     floors = new ArrayList<Floor>();
+    enemies = new ArrayList<Enemy>();
     generateFloors();
+    generateEnemies();
   }
   
   void display()
@@ -23,6 +26,12 @@ class Level {
     for(int i = 0; i < floors.size(); i++)
     {
       floors.get(i).display();
+    }
+    // level generated enemies
+    for(int i = 0; i < enemies.size(); i++)
+    {
+      enemies.get(i).move();
+      enemies.get(i).display();
     }
   }
   
@@ -46,6 +55,18 @@ class Level {
       randY = int(random(1, 7));
 
       floors.add(new Floor((randX * 100), (randY * 100)));
+    }
+  }
+  
+  void generateEnemies()
+  {
+    int randNumEnemies;
+    
+    randNumEnemies = int(random(2, 5));
+    for(int i = 0; i < randNumEnemies; i++)
+    {
+      Floor floorNum = floors.get(i + 1);
+      enemies.add(new Enemy(floorNum.sp));
     }
   }
 }
