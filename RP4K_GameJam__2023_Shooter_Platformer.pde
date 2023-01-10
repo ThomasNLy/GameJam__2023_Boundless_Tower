@@ -14,11 +14,10 @@ void setup()
 
   
   l = new Level();
-  p = new Player(1 ,2);
+
 
   bullets = new ArrayList<Bullet>();
   p = new Player(1, 2);
-
 }
 
 void draw()
@@ -31,6 +30,8 @@ void draw()
     b.move();
     b.display();
   }
+  
+  playerFloorCollision();
 }
 
 void keyPressed()
@@ -50,6 +51,7 @@ void keyPressed()
   }
   if (key == 'w')
   {
+    
     p.yspeed = -5;
   }
   if (key == 's')
@@ -86,5 +88,40 @@ void keyReleased()
   if (key == 'd')
   {
     p.xspeed = 0;
+  }
+}
+
+
+
+
+void playerFloorCollision()
+{
+  for (Floor f : l.floors)
+  {
+    
+    if (p.collision(f))
+    {
+      if (p.y <= f.y) //check if the player lands on top of a floor 
+      {
+        //setting the player's yspeed to 0 and have them appear at the top of the floor 
+        p.yspeed = 0;
+        p.y = f.y - p.h;
+      }
+     
+    }
+    
+    // enemy floor check
+    for(int i = 0; i < l.enemies.size(); i++)
+    {
+      Enemy e = l.enemies.get(i);
+      if (e.checkFloors(f))
+      {
+        if (e.y <= f.y)
+        { 
+          e.yspeed = 0;
+          e.y = f.y - e.h;
+        }
+      }
+    }
   }
 }

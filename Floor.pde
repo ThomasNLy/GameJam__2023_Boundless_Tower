@@ -1,7 +1,5 @@
 class Floor extends GameObject{
   
-  float w;
-  float h;
   SpawnPoint sp;
   
   Floor(int x, int y)
@@ -11,7 +9,7 @@ class Floor extends GameObject{
     this.y = y;
     this.w = 200;
     this.h = 20;
-    this.sp = new SpawnPoint(this.x + this.w/2, this.y - 10);
+    this.sp = new SpawnPoint(this.x + this.w/2, this.y - 25);
   }
   
   void display()
