@@ -1,5 +1,6 @@
 class Player extends GameObject{
   
+  
   boolean facingRight;
   Player(float x, float y)
   {
