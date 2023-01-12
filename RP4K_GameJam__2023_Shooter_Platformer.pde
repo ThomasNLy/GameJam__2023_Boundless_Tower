@@ -231,11 +231,11 @@ void screenBounds()
 // --------------- Going to the Next Level
 void nextLevelCheck()
 {
-  if (p.collision(l.levelKey))
+  if (p.collision(l.levelKey) && !p.hasKey)
   {
     p.hasKey = true;
     l.keyCollected = true;
-    numKeysObtained++;
+    numKeysObtained+= 1;
     
   }
 
@@ -260,6 +260,7 @@ void nextLevel()
   p.hasKey = false;
   p.x = 5;
   p.y = 2;
+  numKeysObtained = 0;
 }
 
 
