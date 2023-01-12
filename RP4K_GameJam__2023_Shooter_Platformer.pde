@@ -1,4 +1,4 @@
-// Testing Git Push/Pull //<>//
+// Testing Git Push/Pull //<>// //<>// //<>//
 // test 2
 
 
@@ -30,6 +30,7 @@ void setup()
 
 void draw()
 {
+   
   keyCheck();
   l.display();
 
@@ -51,9 +52,21 @@ void draw()
     {
       bullets.remove(b);
     }
+    //Get this list of enemies from the level
+    ArrayList<Enemy> levelEnemeis = l.enemies;
+    for (int j = 0; j < levelEnemeis.size(); j++)
+    { 
+      Enemy currentEnemy = levelEnemeis.get(j); 
+       
+      if (b.boxToCircleCollision(currentEnemy))
+      {
+        levelEnemeis.remove(currentEnemy);
+        bullets.remove(b);
+      }
+    }
   }
 
-  
+
   floorCollision();
   nextLevelCheck();
   screenBounds();
@@ -86,7 +99,7 @@ void keyPressed()
 
 void keyReleased()
 {
-  
+
   if (key == 's')
   {
     downKey = false;
@@ -102,7 +115,7 @@ void keyReleased()
     rightKey = false;
     p.xspeed = 0;
   }
-  
+
   if (keyCode == 32)
   {
     shootKey = false;
@@ -149,7 +162,7 @@ void keyCheck()
   {
     p.jumps -= 1;
     p.yspeed = -5;
-    upKey = false; // immediately turn off the jump so all  the jumps aren't used up 
+    upKey = false; // immediately turn off the jump so all  the jumps aren't used up
   }
   if (downKey)
   {
@@ -183,11 +196,11 @@ void keyCheck()
 
 void screenBounds()
 {
-  if(p.x > width - p.w)
+  if (p.x > width - p.w)
   {
     p.x = width - p.w;
   }
-  if(p.x < 0)
+  if (p.x < 0)
   {
     p.x = 0;
   }
@@ -196,17 +209,17 @@ void screenBounds()
 // --------------- Going to the Next Level
 void nextLevelCheck()
 {
-  if(p.collision(l.levelKey))
+  if (p.collision(l.levelKey))
   {
     p.hasKey = true;
     l.keyCollected = true;
   }
-  
-  if(p.hasKey && p.x > levelExit.x)
+
+  if (p.hasKey && p.x > levelExit.x)
   {
     fill(0, 0, 0);
     rect(levelExit.x, levelExit.y, 20, 40);
-    if(p.x > width - p.w)
+    if (p.x > width - p.w)
     {
       nextLevel();
     }
@@ -230,14 +243,15 @@ void UI()
   textSize(20);
   fill(255);
   text("health", 59, 24);
-  for(int i = 0; i < 3; i++)
+  for (int i = 0; i < 3; i++)
   {
-    fill(255, 0 ,0);
+    fill(255, 0, 0);
     circle(141  + i * 30, 17, 15);
     noFill();
   }
   fill(255);
   text("Keys X", 306, 24);
+
   text("Level " + levelNumber, width - 100, 24);
   
 }
