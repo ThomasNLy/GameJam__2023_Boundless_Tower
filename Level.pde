@@ -70,7 +70,7 @@ class Level {
     }
     
     // add a Checkpoint to a floor
-    levelCheckPoint = new CheckPoint(floors.get(2).sp);
+    levelCheckPoint = new CheckPoint(floors.get(0).sp);
   }
   
   void generateEnemies()
