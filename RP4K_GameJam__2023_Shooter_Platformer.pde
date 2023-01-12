@@ -1,4 +1,4 @@
-// Testing Git Push/Pull //<>// //<>// //<>// //<>//
+// Testing Git Push/Pull //<>// //<>// //<>// //<>// //<>//
 // test 2
 
 
@@ -85,6 +85,7 @@ void draw()
   nextLevelCheck();
   screenBounds();
   UI();
+  setCheckpoint();
 }
 
 void keyPressed()
@@ -284,6 +285,8 @@ void takingDamage()
     {
       p.takingDamage = true;
       lives -= 1;
+      p.x = respawn.x;
+      p.y = respawn.y;
     }
   }
 }
