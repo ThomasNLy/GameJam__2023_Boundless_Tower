@@ -16,6 +16,8 @@ class Bullet extends GameObject
     fill(255, 0, 0);
     circle(this.x, this.y, size);
     noFill();
+    fill(244);
+   rect(this.x, this.y, 10, 10);
   }
   
   boolean boxToCircleCollision(GameObject other)
@@ -26,7 +28,7 @@ class Bullet extends GameObject
     boxTop = other.y;
     boxBottom = boxTop + other.h;
     
-    float circleX = this.x;
+    float circleX = this.x ;
     float circleY = this.y;
     float circleR = this.size / 2;
     
@@ -58,13 +60,11 @@ class Bullet extends GameObject
     a = abs(circleX - sideX);
     b = abs(circleY - sideY);
     c = sqrt(a*a + b*b);
-    
-    if(c < circleR)
+    println(c);
+    if(c < 10.1)
     {
       return true;
     }
     return false;
-  }
-  
-  
+  } 
 }
