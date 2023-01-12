@@ -52,6 +52,8 @@ void draw()
   }
 
   playerFloorCollision();
+  
+  UI();
 }
 
 void keyPressed()
@@ -173,4 +175,21 @@ void keyCheck()
       bullets.add(b);
     }
   }
+}
+
+void UI()
+{
+  textSize(20);
+  fill(255);
+  text("health", 59, 24);
+  for(int i = 0; i < 3; i++)
+  {
+    fill(255, 0 ,0);
+    circle(141  + i * 30, 17, 15);
+    noFill();
+  }
+  fill(255);
+  text("Keys X", 306, 24);
+  text("Level 1", width - 100, 24);
+  
 }
