@@ -1,4 +1,4 @@
-// Testing Git Push/Pull //<>// //<>// //<>//
+// Testing Git Push/Pull //<>// //<>// //<>// //<>//
 // test 2
 
 
@@ -9,6 +9,7 @@ ArrayList<Bullet> bullets;
 
 Player p;
 boolean upKey, downKey, leftKey, rightKey, shootKey;
+int lives;
 
 void setup()
 {
@@ -26,6 +27,7 @@ void setup()
   leftKey = false;
   rightKey = false;
   shootKey = false;
+  lives = 3;
 }
 
 void draw()
@@ -65,6 +67,17 @@ void draw()
       }
     }
   }
+  
+  //------------------------------enemy and player collision----------
+  for (int j = 0; j < l.enemies.size(); j++)
+    { 
+      Enemy currentEnemy = l.enemies.get(j); 
+       
+      if (p.collision(currentEnemy))
+      {
+        lives -= 1;
+      }
+    }
 
 
   floorCollision();
@@ -243,7 +256,7 @@ void UI()
   textSize(20);
   fill(255);
   text("health", 59, 24);
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < lives; i++)
   {
     fill(255, 0, 0);
     circle(141  + i * 30, 17, 15);
