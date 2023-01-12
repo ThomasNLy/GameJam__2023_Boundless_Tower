@@ -7,6 +7,7 @@ class Player extends GameObject {
   int shootCoolDown;
   boolean canShoot;
   boolean hasKey;
+  boolean takingDamage;
   
   
   
@@ -27,6 +28,7 @@ class Player extends GameObject {
     this.canShoot = true;
     this.shootCoolDown = 0;
     this.hasKey = false;
+    this.takingDamage = false;
   }
 
   void display()
