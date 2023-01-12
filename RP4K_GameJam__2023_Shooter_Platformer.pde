@@ -50,15 +50,16 @@ void draw()
     {
       bullets.remove(b);
     }
-    for (int j = 0; j < l.enemies.size(); j++)
+    //Get this list of enemies from the level
+    ArrayList<Enemy> levelEnemeis = l.enemies;
+    for (int j = 0; j < levelEnemeis.size(); j++)
     { 
-      Enemy currentEnemy = l.enemies.get(j); 
+      Enemy currentEnemy = levelEnemeis.get(j); 
        
       if (b.boxToCircleCollision(currentEnemy))
       {
-       
+        levelEnemeis.remove(currentEnemy);
         bullets.remove(b);
-        break;
       }
     }
   }
