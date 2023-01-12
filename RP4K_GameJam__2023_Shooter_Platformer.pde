@@ -4,6 +4,7 @@
 
 Level l;
 SpawnPoint levelExit;
+int levelNumber;
 ArrayList<Bullet> bullets;
 
 Player p;
@@ -16,6 +17,7 @@ void setup()
 
   l = new Level();
   levelExit = new SpawnPoint(1260, 660);
+  levelNumber = 1;
 
   bullets = new ArrayList<Bullet>();
   p = new Player(1, 2);
@@ -215,6 +217,7 @@ void nextLevel()
 {
   // create a new level
   l = new Level();
+  levelNumber += 1;
   // reset the player
   p.hasKey = false;
   p.x = 5;
@@ -235,6 +238,6 @@ void UI()
   }
   fill(255);
   text("Keys X", 306, 24);
-  text("Level 1", width - 100, 24);
+  text("Level " + levelNumber, width - 100, 24);
   
 }
