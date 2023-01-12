@@ -1,4 +1,4 @@
-// Testing Git Push/Pull
+// Testing Git Push/Pull //<>//
 // test 2
 
 
@@ -7,6 +7,7 @@ Level l;
 ArrayList<Bullet> bullets;
 
 Player p;
+boolean upKey, downKey, leftKey, rightKey, shootKey;
 
 void setup()
 {
@@ -18,92 +19,87 @@ void setup()
 
   bullets = new ArrayList<Bullet>();
   p = new Player(1, 2);
+  upKey = false;
+  downKey = false;
+  leftKey = false;
+  rightKey = false;
+  shootKey = false;
 }
 
 void draw()
 {
+  keyCheck();
   l.display();
 
   p.move();
-  
+
   p.display();
   p.limitFireRate();
   for (Bullet b : bullets)
   {
     b.move();
     b.display();
-    
   }
   // a separate for loop needed to remove bullets as it can cause an index error to due index shifting when removing items
   // and calling upon them
-  for(int i = 0; i < bullets.size(); i++)
+  for (int i = 0; i < bullets.size(); i++)
   {
     Bullet b = bullets.get(i);
-    if(b.x < 0 || b.x > width)
+    if (b.x < 0 || b.x > width)
     {
       bullets.remove(b);
     }
   }
-  
+
   playerFloorCollision();
 }
 
 void keyPressed()
 {
-  if (keyCode == 32 && p.canShoot)
+  if (keyCode == 32 )
   {
-    p.canShoot = false;
-    
-    if (p.facingRight)
-    {
-      Bullet b = new Bullet(p.x, p.y, 1);
-      bullets.add(b);
-    } 
-    else
-    {
-      Bullet b = new Bullet(p.x, p.y, -1);
-      bullets.add(b);
-    }
+    shootKey = true;
   }
-  if (key == 'w'  && p.jumps > 0)
+  if (key == 'w')
   {
-    p.jumps -= 1;
-    p.yspeed = -5;
+    upKey = true;
   }
   if (key == 's')
   {
-    p.yspeed = 5;
+    downKey = true;
   }
   if (key == 'a')
   {
-    p.xspeed = -5;
-    p.facingRight = false;
+    leftKey = true;
   }
   if (key == 'd')
   {
-    p.xspeed = 5;
-    p.facingRight = true;
+    rightKey = true;
   }
 }
 
 void keyReleased()
 {
-
-  //if (key == 'w' || keyCode == UP)
-  //{
-  //  p.yspeed = 0;
-  //}
+  
   if (key == 's')
   {
+    downKey = false;
     p.yspeed = 0;
   }
   if (key == 'a')
   {
+    leftKey = false;
     p.xspeed = 0;
   }
   if (key == 'd')
   {
+    rightKey = false;
     p.xspeed = 0;
+  }
+  
+  if (keyCode == 32)
+  {
+    shootKey = false;
   }
 }
 
@@ -124,9 +120,9 @@ void playerFloorCollision()
         p.jumps = p.maxJumps;
       }
     }
-    
+
     // enemy floor check
-    for(int i = 0; i < l.enemies.size(); i++)
+    for (int i = 0; i < l.enemies.size(); i++)
     {
       Enemy e = l.enemies.get(i);
       if (e.checkFloors(f))
@@ -137,6 +133,44 @@ void playerFloorCollision()
           e.y = f.y - e.h;
         }
       }
+    }
+  }
+}
+
+void keyCheck()
+{
+  if (upKey && p.jumps > 0)
+  {
+    p.jumps -= 1;
+    p.yspeed = -5;
+    upKey = false; // immediately turn off the jump so all  the jumps aren't used up 
+  }
+  if (downKey)
+  {
+    p.yspeed = 5;
+  }
+  if (leftKey)
+  {
+    p.xspeed = -5;
+    p.facingRight = false;
+  }
+  if (rightKey)
+  {
+    p.xspeed = 5;
+    p.facingRight = true;
+  }
+  if (shootKey && p.canShoot)
+  {
+    p.canShoot = false;
+
+    if (p.facingRight)
+    {
+      Bullet b = new Bullet(p.x, p.y, 1);
+      bullets.add(b);
+    } else
+    {
+      Bullet b = new Bullet(p.x, p.y, -1);
+      bullets.add(b);
     }
   }
 }
