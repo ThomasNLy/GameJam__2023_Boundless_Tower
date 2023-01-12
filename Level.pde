@@ -44,6 +44,7 @@ class Level {
     {
       levelKey.display();
     }
+    levelCheckPoint.display();
   }
   
   void generateFloors()
@@ -67,6 +68,9 @@ class Level {
 
       floors.add(new Floor((randX * 100), (randY * 100)));
     }
+    
+    // add a Checkpoint to a floor
+    levelCheckPoint = new CheckPoint(floors.get(2).sp);
   }
   
   void generateEnemies()
