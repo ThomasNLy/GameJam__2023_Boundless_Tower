@@ -1,11 +1,13 @@
 class Bullet extends GameObject
 {
   int xdir;
+  float velocity = 5;
   Bullet(float x, float y, int xdir)
   {
     this.x = x;
     this.y = y;
-    xspeed = 1 * xdir;
+    
+    xspeed = velocity * xdir;
   }
   
   void display()
