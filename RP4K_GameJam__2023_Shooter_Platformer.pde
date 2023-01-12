@@ -3,7 +3,7 @@
 
 
 Level l;
-
+SpawnPoint levelExit;
 ArrayList<Bullet> bullets;
 
 Player p;
@@ -14,7 +14,7 @@ void setup()
 
 
   l = new Level();
-  p = new Player(1, 2);
+  levelExit = new SpawnPoint(1200, 680);
 
   bullets = new ArrayList<Bullet>();
   p = new Player(1, 2);
@@ -45,7 +45,7 @@ void draw()
     }
   }
   
-  playerFloorCollision();
+  floorCollision();
 }
 
 void keyPressed()
@@ -109,7 +109,7 @@ void keyReleased()
 
 
 
-void playerFloorCollision()
+void floorCollision()
 {
   for (Floor f : l.floors)
   {
@@ -138,5 +138,17 @@ void playerFloorCollision()
         }
       }
     }
+  }
+}
+
+
+// --------------- Going to the Next Level
+void nextLevelCheck()
+{
+  
+  
+  if(p.hasKey && p.x > levelExit.x)
+  {
+    
   }
 }

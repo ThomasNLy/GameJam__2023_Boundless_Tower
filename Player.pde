@@ -6,7 +6,7 @@ class Player extends GameObject {
   int fireRate;
   int shootCoolDown;
   boolean canShoot;
-  
+  boolean hasKey;
   
   
   
@@ -26,6 +26,7 @@ class Player extends GameObject {
     this.fireRate = 30;
     this.canShoot = true;
     this.shootCoolDown = 0;
+    this.hasKey = false;
   }
 
   void display()
