@@ -10,7 +10,11 @@ ArrayList<Bullet> bullets;
 
 Player p;
 boolean upKey, downKey, leftKey, rightKey, shootKey;
+int lives;
+int damageTimer;
+int numKeysObtained;
 
+JSONObject data; // for saving and loading data as json 
 void setup()
 {
   size(1280, 720);
@@ -28,11 +32,17 @@ void setup()
   leftKey = false;
   rightKey = false;
   shootKey = false;
+  lives = 3;
+  damageTimer = 0;
+  numKeysObtained = 0;
+  
+  //-----reading and writting save data------
+  data = loadJSONObject("data.json");
 }
 
 void draw()
 {
-   
+
   keyCheck();
   l.display();
 
@@ -59,7 +69,7 @@ void draw()
     for (int j = 0; j < levelEnemeis.size(); j++)
     { 
       Enemy currentEnemy = levelEnemeis.get(j); 
-       
+
       if (b.boxToCircleCollision(currentEnemy))
       {
         levelEnemeis.remove(currentEnemy);
@@ -69,6 +79,8 @@ void draw()
   }
 
 
+
+  takingDamage();
   floorCollision();
   nextLevelCheck();
   screenBounds();
@@ -222,6 +234,8 @@ void nextLevelCheck()
   {
     p.hasKey = true;
     l.keyCollected = true;
+    numKeysObtained++;
+    
   }
 
   if (p.hasKey && p.x > levelExit.x)
@@ -248,20 +262,63 @@ void nextLevel()
 }
 
 
+//------------------------------enemy and player collision----------
+void takingDamage()
+{
+
+  if(p.takingDamage)
+  {
+    damageTimer++;
+    if(damageTimer > 30)
+    {
+      damageTimer = 0;
+      p.takingDamage = false;
+    }
+  }
+  
+  for (int j = 0; j < l.enemies.size(); j++)
+  { 
+    Enemy currentEnemy = l.enemies.get(j); 
+
+    if (p.collision(currentEnemy) && !p.takingDamage)
+    {
+      p.takingDamage = true;
+      lives -= 1;
+    }
+  }
+}
+
+
+
 void UI()
 {
   textSize(20);
+  textAlign(LEFT);
   fill(255);
   text("health", 59, 24);
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < lives; i++)
   {
     fill(255, 0, 0);
     circle(141  + i * 30, 17, 15);
     noFill();
   }
   fill(255);
-  text("Keys X", 306, 24);
-
+  text("Keys x" + numKeysObtained, 306, 24);
+  
   text("Level " + levelNumber, width - 100, 24);
   
+  if(lives <= 0) // safety to keep game over on screen as didn't stop game loop when game over
+  {
+    saveGame();
+    textSize(50);
+    textAlign(CENTER);
+    text("Game Over", width/2, height/2);
+  }
+}
+
+//----------used to save game data-------------
+void saveGame()
+{
+  data.setInt("levelNumber", levelNumber);
+  saveJSONObject(data, "data.json");
 }
