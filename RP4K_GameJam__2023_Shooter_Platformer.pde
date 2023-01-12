@@ -53,11 +53,12 @@ void draw()
     for (int j = 0; j < l.enemies.size(); j++)
     { 
       Enemy currentEnemy = l.enemies.get(j); 
-       println(b.boxToCircleCollision(currentEnemy));
+       
       if (b.boxToCircleCollision(currentEnemy))
       {
-        println("asasdf");
+       
         bullets.remove(b);
+        break;
       }
     }
   }
