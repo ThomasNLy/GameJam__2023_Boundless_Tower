@@ -1,9 +1,10 @@
-// Testing Git Push/Pull //<>// //<>// //<>//
+// Testing Git Push/Pull //<>// //<>// //<>// //<>//
 // test 2
 
 
 Level l;
 SpawnPoint levelExit;
+SpawnPoint respawn;
 int levelNumber;
 ArrayList<Bullet> bullets;
 
@@ -17,6 +18,7 @@ void setup()
 
   l = new Level();
   levelExit = new SpawnPoint(1260, 660);
+  respawn = new SpawnPoint(5, 5);
   levelNumber = 1;
 
   bullets = new ArrayList<Bullet>();
@@ -122,7 +124,14 @@ void keyReleased()
   }
 }
 
-
+void setCheckpoint()
+{
+  if(p.collision(l.levelCheckPoint))
+  {
+    respawn.x = l.levelCheckPoint.x;
+    respawn.y = l.levelCheckPoint.y;
+  }
+}
 
 void floorCollision()
 {
@@ -231,6 +240,7 @@ void nextLevel()
   // create a new level
   l = new Level();
   levelNumber += 1;
+  respawn = new SpawnPoint(5, 5);
   // reset the player
   p.hasKey = false;
   p.x = 5;
