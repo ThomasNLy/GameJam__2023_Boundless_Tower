@@ -6,6 +6,7 @@ class Level {
   ArrayList<Floor> floors;
   ArrayList<Enemy> enemies;
   Key levelKey;
+  CheckPoint levelCheckPoint;
   boolean keyCollected;
  
   Level()
