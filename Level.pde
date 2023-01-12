@@ -5,6 +5,7 @@ class Level {
   int h;
   ArrayList<Floor> floors;
   ArrayList<Enemy> enemies;
+  Key levelKey;
  
   Level()
   {
@@ -16,6 +17,7 @@ class Level {
     enemies = new ArrayList<Enemy>();
     generateFloors();
     generateEnemies();
+    spawnKey();
   }
   
   void display()
@@ -33,6 +35,9 @@ class Level {
       enemies.get(i).move();
       enemies.get(i).display();
     }
+    
+    // the key to go to the next level
+    levelKey.display();
   }
   
   void generateFloors()
@@ -68,5 +73,12 @@ class Level {
       Floor floorNum = floors.get(i + 1);
       enemies.add(new Enemy(floorNum.sp));
     }
+  }
+  
+  void spawnKey()
+  {
+    int randFloorNum = int(random(1, floors.size()));
+    
+    levelKey = new Key(floors.get(randFloorNum).sp);
   }
 }
