@@ -3,23 +3,25 @@ class Bullet extends GameObject
   int xdir;
   int size;
   float velocity = 5;
+  float circleR;
   Bullet(float x, float y, int xdir)
   {
     this.x = x;
     this.y = y;
     this.size = 10;
     xspeed = velocity * xdir;
+    circleR = this.size / 2;
   }
-  
+
   void display()
   {
     fill(255, 0, 0);
     circle(this.x, this.y, size);
     noFill();
     fill(244);
-   rect(this.x, this.y, 10, 10);
+    
   }
-  
+
   boolean boxToCircleCollision(GameObject other)
   {
     float boxLeft, boxRight, boxTop, boxBottom;
@@ -27,44 +29,44 @@ class Bullet extends GameObject
     boxRight = boxLeft + other.w;
     boxTop = other.y;
     boxBottom = boxTop + other.h;
-    
+
     float circleX = this.x ;
     float circleY = this.y;
-    float circleR = this.size / 2;
-    
-    
-    
-    
+    //float circleR = this.size / 2;
+
+
+
+
     //which side of the box they are on 
     float sideX, sideY;
     sideX = circleX;
     sideY = circleY;
-    if(circleX > boxRight)
+    if (circleX > boxRight)
     {
       sideX = boxRight;
     }
-    if(circleX < boxLeft)
+    if (circleX < boxLeft)
     {
       sideX = boxLeft;
     }
-    if(circleY > boxTop)
+    if (circleY < boxTop)
     {
       sideY = boxTop;
     }
-    if(circleY < boxBottom)
+    if (circleY > boxBottom)
     {
       sideY = boxBottom;
     }
-    
-    float a, b ,c;
+
+    float a, b, c;
     a = abs(circleX - sideX);
     b = abs(circleY - sideY);
     c = sqrt(a*a + b*b);
-    println(c);
-    if(c < 10.1)
+   
+    if (c < circleR)
     {
       return true;
     }
     return false;
-  } 
+  }
 }
