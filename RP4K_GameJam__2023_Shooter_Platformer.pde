@@ -197,6 +197,7 @@ void nextLevelCheck()
   if(p.collision(l.levelKey))
   {
     p.hasKey = true;
+    l.keyCollected = true;
   }
   
   if(p.hasKey && p.x > levelExit.x)

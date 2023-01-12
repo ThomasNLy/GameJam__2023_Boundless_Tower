@@ -6,6 +6,7 @@ class Level {
   ArrayList<Floor> floors;
   ArrayList<Enemy> enemies;
   Key levelKey;
+  boolean keyCollected;
  
   Level()
   {
@@ -13,6 +14,7 @@ class Level {
     this.y = 0;
     this.w = 1280;
     this.h = 720;
+    keyCollected = false;
     floors = new ArrayList<Floor>();
     enemies = new ArrayList<Enemy>();
     generateFloors();
@@ -37,7 +39,10 @@ class Level {
     }
     
     // the key to go to the next level
-    levelKey.display();
+    if(!keyCollected)
+    {
+      levelKey.display();
+    }
   }
   
   void generateFloors()
