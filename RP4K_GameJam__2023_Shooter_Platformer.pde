@@ -50,15 +50,12 @@ void draw()
       bullets.remove(b);
     }
   }
-<<<<<<< HEAD
 
-  playerFloorCollision();
-=======
   
   floorCollision();
   nextLevelCheck();
   screenBounds();
->>>>>>> Key-and-Next-Level
+  UI();
 }
 
 void keyPressed()
@@ -144,7 +141,6 @@ void floorCollision()
   }
 }
 
-<<<<<<< HEAD
 void keyCheck()
 {
   if (upKey && p.jumps > 0)
@@ -182,7 +178,7 @@ void keyCheck()
     }
   }
 }
-=======
+
 void screenBounds()
 {
   if(p.x > width - p.w)
@@ -223,4 +219,21 @@ void nextLevel()
   p.x = 5;
   p.y = 2;
 }
->>>>>>> Key-and-Next-Level
+
+
+void UI()
+{
+  textSize(20);
+  fill(255);
+  text("health", 59, 24);
+  for(int i = 0; i < 3; i++)
+  {
+    fill(255, 0 ,0);
+    circle(141  + i * 30, 17, 15);
+    noFill();
+  }
+  fill(255);
+  text("Keys X", 306, 24);
+  text("Level 1", width - 100, 24);
+  
+}
