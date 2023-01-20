@@ -11,6 +11,7 @@ ArrayList<Bullet> bullets;
 Player p;
 boolean upKey, downKey, leftKey, rightKey, shootKey;
 int lives;
+PImage livesImg;
 int damageTimer;
 int numKeysObtained;
 
@@ -35,6 +36,7 @@ void setup()
   lives = 3;
   damageTimer = 0;
   numKeysObtained = 0;
+  livesImg = loadImage("pics/heart.png");
   
   //-----reading and writting save data------
   data = loadJSONObject("data.json");
@@ -109,6 +111,11 @@ void keyPressed()
   if (key == 'd')
   {
     rightKey = true;
+  }
+  
+  if(keyCode == ENTER && lives <= 0)
+  {
+    setup();
   }
 }
 
@@ -302,13 +309,15 @@ void UI()
   text("health", 59, 24);
   for (int i = 0; i < lives; i++)
   {
-    fill(255, 0, 0);
-    circle(141  + i * 30, 17, 15);
-    noFill();
+    //fill(255, 0, 0);
+    //circle(141  + i * 30, 17, 15);
+    //noFill();
+    image(livesImg, 125  + i * 30, 5); 
   }
   fill(255);
   text("Keys x" + numKeysObtained, 306, 24);
   
+  text("Best Score: " + data.getInt("levelNumber") + " Level(s) Cleared " , width - 700, 24);
   text("Level " + levelNumber, width - 100, 24);
   
   if(lives <= 0) // safety to keep game over on screen as didn't stop game loop when game over
