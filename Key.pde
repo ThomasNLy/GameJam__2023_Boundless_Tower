@@ -15,7 +15,7 @@ class Key extends GameObject
   void display()
   {
     fill(0, 200, 0);
-    circle(this.x, this.y, this.w);
+    //circle(this.x, this.y, this.w);
     image(img, this.x - 17, this.y - 15);
   }
   
